@@ -4,9 +4,7 @@ import Dashboard from "@/pages/Dashboard";
 // Import Assets
 import './App.css'
 
-
-
-function App() {
+const App = () => {
   return <Dashboard />;
 }
 

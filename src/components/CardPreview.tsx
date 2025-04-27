@@ -17,8 +17,10 @@ import AspireLogoWhite from "@/assets/icons/AspireLogoWhite.svg?react";
 
 const CardPreview = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [showCardNumber, setShowCardNumber] = useState(false);
+
   const cards: Card[] = useCardStore((state) => state.cards);
   const toggleFrozen = useCardStore((state) => state.toggleFrozen);
 

@@ -25,10 +25,10 @@ const MainContent: React.FC = () => {
 
       <TabsContent value="my-debit-cards">
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-12 bg-white rounded-xl shadow-lg p-10  h-full">
-          <div className="lg:col-span-5 space-y-6">
+          <div className="col-span-10 xl:col-span-5 space-y-6">
             <CardPreview />
           </div>
-          <div className="lg:col-span-5 space-y-6">
+          <div className="col-span-10 xl:col-span-5 space-y-6">
             <Transactions />
           </div>
         </div>

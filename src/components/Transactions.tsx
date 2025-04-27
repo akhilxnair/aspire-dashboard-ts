@@ -54,7 +54,7 @@ const transactions: Transaction[] = [
     type: "Charge",
     icon: <Megaphone />,
     iconBg: "bg-pink-100",
-    amountColor: "#222222", // Change to #222222
+    amountColor: "#222222",
     typeLabel: "Charged to debit card",
   },
   {
