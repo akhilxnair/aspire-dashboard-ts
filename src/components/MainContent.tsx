@@ -7,28 +7,28 @@ import Transactions from "@/components/Transactions";
 
 const MainContent = () => {
   return (
-    <Tabs defaultValue="my-debit-cards" className="w-full">
+    <Tabs defaultValue="my-debit-cards" className="w-full h-full">
       <TabsList className="bg-transparent p-0 flex gap-4 ">
         <TabsTrigger
           value="my-debit-cards"
-          className="data-[state=active]:text-black rounded-none px-1"
+          className="data-[state=active]:text-black text-black/30 rounded-none px-1"
         >
           My debit cards
         </TabsTrigger>
         <TabsTrigger
           value="all-company-cards"
-          className="data-[state=active]:text-black rounded-none px-1 "
+          className="data-[state=active]:text-black text-black/30 rounded-none px-1 "
         >
           All company cards
         </TabsTrigger>
       </TabsList>
 
       <TabsContent value="my-debit-cards">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-12 bg-white rounded-xl shadow-lg p-10  h-full">
+          <div className="lg:col-span-5 space-y-6">
             <CardPreview />
           </div>
-          <div>
+          <div className="lg:col-span-5 space-y-6">
             <Transactions />
           </div>
         </div>
