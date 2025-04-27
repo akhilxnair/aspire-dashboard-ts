@@ -5,7 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 // Import Icons
 import FileStorage from "@/assets/icons/FileStorage.svg?react";
 import FlightsIcon from "@/assets/icons/FlightsIcon.svg?react";
-import Megaphone from "@/assets/icons/Megaphone.svg?react";
+import MegaphoneIcon from "@/assets/icons/MegaphoneIcon.svg?react";
 import CardDetailsIcon from "@/assets/icons/CardDetailsIcon.svg?react";
 import RecentTransactionIcon from "@/assets/icons/RecentTransactionIcon.svg?react";
 import TransactionCardIcon from "@/assets/icons/TransactionCardIcon.svg?react";
@@ -52,7 +52,7 @@ const transactions: Transaction[] = [
     date: "20 May 2020",
     amount: "- S$150",
     type: "Charge",
-    icon: <Megaphone />,
+    icon: <MegaphoneIcon />,
     iconBg: "bg-pink-100",
     amountColor: "#222222",
     typeLabel: "Charged to debit card",
