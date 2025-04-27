@@ -1,22 +1,26 @@
 // Import Modules
 import { Eye, EyeOff } from "lucide-react";
-import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { FunctionComponent, useCallback, useEffect, useState } from "react";
+
+// Import Store
+import { useCardStore } from "@/store/cardStore";
 
 // Import Icons
-import AspireLogoWhite from "@/assets/icons/AspireLogoWhite.svg?react";
-import FreezeCard from "@/assets/icons/FreezeCard.svg?react";
-import SetSpendLimit from "@/assets/icons/SetSpendLimit.svg?react";
 import GPay from "@/assets/icons/GPay.svg?react";
-import ReplaceCard from "@/assets/icons/ReplaceCard.svg?react";
-import CancelCard from "@/assets/icons/CancelCard.svg?react";
 import VisaLogo from "@/assets/icons/VisaLogo.svg?react";
+import CancelCard from "@/assets/icons/CancelCard.svg?react";
+import FreezeCard from "@/assets/icons/FreezeCard.svg?react";
+import ReplaceCard from "@/assets/icons/ReplaceCard.svg?react";
+import SetSpendLimit from "@/assets/icons/SetSpendLimit.svg?react";
+import AspireLogoWhite from "@/assets/icons/AspireLogoWhite.svg?react";
 
 
 const CardPreview = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showCardNumber, setShowCardNumber] = useState(false);
+  const cards = useCardStore((state) => state.cards);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -29,12 +33,6 @@ const CardPreview = () => {
     emblaApi.on("select", onSelect);
     onSelect();
   }, [emblaApi, onSelect]);
-
-  const cards = [
-    { id: 1, number: "1234 5678 9012 3456", masked: "•••• •••• •••• 3456" },
-    { id: 2, number: "9876 5432 1098 7654", masked: "•••• •••• •••• 7654" },
-    { id: 3, number: "1111 2222 3333 4444", masked: "•••• •••• •••• 4444" },
-  ];
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -59,14 +57,12 @@ const CardPreview = () => {
             >
               <div className="bg-green-500 m-2 text-white rounded-xl p-7 pt-20 relative shadow-md h-64 flex flex-col justify-between overflow-hidden">
                 <div className="flex flex-col gap-4">
-                  <div className="text-2xl font-bold tracking-wider">Mark Henry</div>
-
+                  <div className="text-2xl font-bold tracking-wider">{card.name ?? "Name"}</div>
                   <div className="text-xl tracking-widest">
                     {showCardNumber ? card.number : card.masked}
                   </div>
-
                   <div className="flex gap-9 text-sm">
-                    <div>Thru: 12/30</div>
+                    <div>Thru: {card.expiry ?? "00/00"}</div>
                     <div>CVV: <span className="text-2xl font-bold align-middle" style={{ lineHeight: "12px" }}>***</span></div>
                   </div>
                 </div>
