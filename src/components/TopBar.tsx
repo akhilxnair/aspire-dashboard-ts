@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
 // Import Store
-import { useCardStore } from "@/store/cardStore";
+import { useCardStore, Card } from "@/store/cardStore";
 
 // Import Components
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ const TopBar = () => {
   const [cardName, setCardName] = useState("");
   const { cards, setCards } = useCardStore();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const number = generateCardNumber();
     setCards([
@@ -41,7 +41,7 @@ const TopBar = () => {
         masked: "•••• •••• •••• " + number.split(" ")[3],
         name: cardName,
         expiry: generateExpiry(),
-      },
+      } as Card,
       ...cards,
     ]);
     setCardName("");

@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import CardPreview from "@/components/CardPreview";
 import Transactions from "@/components/Transactions";
 
-const MainContent = () => {
+const MainContent: React.FC = () => {
   return (
     <Tabs defaultValue="my-debit-cards" className="w-full h-full">
       <TabsList className="bg-transparent p-0 flex gap-4 ">

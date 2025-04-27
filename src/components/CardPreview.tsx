@@ -1,10 +1,10 @@
 // Import Modules
 import { Eye, EyeOff } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
-import { FunctionComponent, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type FC } from "react";
 
 // Import Store
-import { useCardStore } from "@/store/cardStore";
+import { useCardStore, Card } from "@/store/cardStore";
 
 // Import Icons
 import GPay from "@/assets/icons/GPay.svg?react";
@@ -15,12 +15,12 @@ import ReplaceCard from "@/assets/icons/ReplaceCard.svg?react";
 import SetSpendLimit from "@/assets/icons/SetSpendLimit.svg?react";
 import AspireLogoWhite from "@/assets/icons/AspireLogoWhite.svg?react";
 
-
 const CardPreview = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [showCardNumber, setShowCardNumber] = useState(false);
-  const cards = useCardStore((state) => state.cards);
+  const cards: Card[] = useCardStore((state) => state.cards);
+  const toggleFrozen = useCardStore((state) => state.toggleFrozen);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -55,8 +55,13 @@ const CardPreview = () => {
               key={index}
               className="min-w-0 flex-[0_0_100%]"
             >
-              <div className="bg-green-500 m-2 text-white rounded-xl p-7 pt-20 relative shadow-md h-64 flex flex-col justify-between overflow-hidden">
-                <div className="flex flex-col gap-4">
+              <div className={`bg-green-500 m-2 text-white rounded-xl p-7 pt-20 relative shadow-md h-64 flex flex-col justify-between overflow-hidden transition-all ${card.frozen ? "opacity-50" : ""}`}>
+                {card.frozen && (
+                  <div className="absolute inset-0 bg-gray-900/40 flex items-center justify-center z-10 rounded-xl">
+                    <span className="text-white text-lg font-bold">Frozen</span>
+                  </div>
+                )}
+                <div className="flex flex-col gap-4 z-0">
                   <div className="text-2xl font-bold tracking-wider">{card.name ?? "Name"}</div>
                   <div className="text-xl tracking-widest">
                     {showCardNumber ? card.number : card.masked}
@@ -88,7 +93,11 @@ const CardPreview = () => {
       </div>
 
       <div className="w-full flex-wrap flex flex-row bg-blue-100 gap-4 max-w-md rounded-xl p-5 mt-4">
-        <ActionButton Icon={FreezeCard} label="Freeze card" />
+        <ActionButton
+          Icon={FreezeCard}
+          label={cards[selectedIndex]?.frozen ? "Unfreeze" : "Freeze card"}
+          onClick={() => toggleFrozen(cards[selectedIndex]?.id)}
+        />
         <ActionButton Icon={SetSpendLimit} label="Set spend limit" />
         <ActionButton Icon={GPay} label="Add to GPay" />
         <ActionButton Icon={ReplaceCard} label="Replace card" />
@@ -99,9 +108,17 @@ const CardPreview = () => {
   );
 };
 
-const ActionButton = ({ Icon, label }: { Icon: FunctionComponent; label: string }) => {
+const ActionButton = ({
+  Icon,
+  label,
+  onClick,
+}: {
+  Icon: FC;
+  label: string;
+  onClick?: () => void;
+}) => {
   return (
-    <div className="flex flex-col gap-2 items-center cursor-pointer">
+    <div className="flex flex-col gap-2 items-center cursor-pointer" onClick={onClick}>
       <Icon />
       <div className="text-xs w-15 text-center">{label}</div>
     </div>

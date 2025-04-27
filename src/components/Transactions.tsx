@@ -1,4 +1,5 @@
 // Import Modules
+import type { ReactElement } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Import Icons
@@ -10,7 +11,19 @@ import RecentTransactionIcon from "@/assets/icons/RecentTransactionIcon.svg?reac
 import TransactionCardIcon from "@/assets/icons/TransactionCardIcon.svg?react";
 import ChevronRightIcon from "@/assets/icons/ChevronRightIcon.svg?react";
 
-const transactions = [
+type Transaction = {
+  id: number;
+  title: string;
+  date: string;
+  amount: string;
+  type: string;
+  icon: ReactElement;
+  iconBg: string;
+  amountColor: string;
+  typeLabel: string;
+};
+
+const transactions: Transaction[] = [
   {
     id: 1,
     title: "Hamleys",
