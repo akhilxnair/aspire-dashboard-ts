@@ -27,3 +27,7 @@
 - `src/lib` – Utilities
 
 ---
+
+## Deployed on Vercel
+
+https://aspire-dashboard-ts-su5m.vercel.app/
